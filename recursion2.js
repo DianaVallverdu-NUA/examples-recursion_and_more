@@ -2,18 +2,17 @@ let trunkColorOne;
 let trunkColorTwo;
 
 //values of min and max lengths and strokes to be mapped out when drawing a branch
-const MIN_BRANCH_LENGTH = 1;
 const MAX_BRANCH_LENGTH = 200;
 const MIN_STROKE = 1;
 const MAX_STROKE = 8;
 
-const MOTHER_BRANCHES = 3;
+const MOTHER_BRANCHES = 1;
 
 const CHILD_BRANCHES = 5;
 
 const MAX_ANGLE = 60;
 
-const LEAVE_SIZE = 20;
+const LEAVE_SIZE = 10;
 
 const lenghtColors = {};
 
@@ -39,12 +38,9 @@ function setup() {
   // noLoop();
 }
 
-let branches = 0;
+let motherBranches = 0;
 function draw() {
-  // noLoop();
-  if (branches === MOTHER_BRANCHES) noLoop();
-  //reset all translations and rotations - advanced version
-  // resetMatrix();
+  if (motherBranches === MOTHER_BRANCHES) noLoop();
 
   //translate to middle bottom
   translate(width / 2, height);
@@ -52,8 +48,8 @@ function draw() {
   //draw the tree
   drawBranch(MAX_BRANCH_LENGTH, MAX_ANGLE);
 
-  //keep number of branches
-  branches++;
+  //keep number of mother branches
+  motherBranches++;
 }
 
 /**
@@ -61,14 +57,13 @@ function draw() {
  * @param {Number} length length of branch drawn
  */
 const drawBranch = (length, maxAngle) => {
-  //maximum angle of next branch
-
-  if (length < LEAVE_SIZE) {
+  //if time to draw leave, draw and return
+  if (length < LEAVE_SIZE || (length < MAX_BRANCH_LENGTH && random() <  0.1)) {
     drawLeave();
     return;
   }
 
-  drawIndividualBranch(length, maxAngle)
+  drawIndividualBranch(length, maxAngle);
 };
 
 const drawLeave = () => {
@@ -80,7 +75,6 @@ const drawLeave = () => {
 
   fill(r, g, b);
 
-
   //remove stroke
   noStroke();
 
@@ -91,7 +85,7 @@ const drawLeave = () => {
   beginShape();
 
   //draw semi circle part of circle
-  for(let theta = 45; theta < 135; theta++) {
+  for (let theta = 45; theta < 135; theta++) {
     //calculate x and y
     const x = radius * cos(theta);
     const y = radius * sin(theta);
@@ -101,7 +95,7 @@ const drawLeave = () => {
   }
 
   //draw opposite part of the circle
-  for(let theta = 135; theta > 45; theta--) {
+  for (let theta = 135; theta > 45; theta--) {
     const x = radius * cos(theta);
     const y = radius * sin(-theta);
 
@@ -112,12 +106,12 @@ const drawLeave = () => {
   endShape(CLOSE);
 
   pop();
-}
+};
 
 const drawIndividualBranch = (length, maxAngle) => {
   // stroke weight is propotional to branch thickness
   strokeWeight(
-    map(length, MIN_BRANCH_LENGTH, MAX_BRANCH_LENGTH, MIN_STROKE, MAX_STROKE)
+    map(length, LEAVE_SIZE, MAX_BRANCH_LENGTH, MIN_STROKE, MAX_STROKE)
   );
 
   //mix two colours for the branch
@@ -129,9 +123,6 @@ const drawIndividualBranch = (length, maxAngle) => {
 
   //immediately translate the drawing context to end of the line ready for next line
   translate(0, -length);
-
-  //check if at end
-  if (length <= MIN_BRANCH_LENGTH) return;
 
   //save the current drawing context
   for (let i = 0; i < CHILD_BRANCHES; i++) {
