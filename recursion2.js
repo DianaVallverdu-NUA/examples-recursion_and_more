@@ -7,11 +7,11 @@ const MAX_BRANCH_LENGTH = 200;
 const MIN_STROKE = 1;
 const MAX_STROKE = 8;
 
-const MOTHER_BRANCHES = 2;
+const MOTHER_BRANCHES = 3;
 
-const CHILD_BRANCHES = 3;
+const CHILD_BRANCHES = 5;
 
-const MAX_ANGLE = 45;
+const MAX_ANGLE = 60;
 
 const LEAVE_SIZE = 20;
 
@@ -65,7 +65,7 @@ const drawBranch = (length, maxAngle) => {
 
   if (length < LEAVE_SIZE) {
     drawLeave();
-    // return;
+    return;
   }
 
   drawIndividualBranch(length, maxAngle)
