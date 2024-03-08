@@ -67,10 +67,11 @@ let alpha = 265;
 let drawingLine = false;
 let currentLine = {};
 
-const LINE_STEP = 20;
+const LINE_STEP = 500;
 
 const drawCurrentLine = () => {
-  const newLength = currentLine.drawnLength + LINE_STEP;
+  let newLength = currentLine.drawnLength + LINE_STEP;
+  if(newLength > currentLine.length) newLength = currentLine.length;
   let deltaX = 0;
   let deltaY = 0;
   //right
