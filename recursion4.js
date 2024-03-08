@@ -2,7 +2,7 @@
 let INITIAL_LENGTH;
 
 //minimum length drawn
-const MIN_LENGTH = 10;
+const MIN_LENGTH = 50;
 
 //children per branch
 const CHILDREN = 4;
@@ -22,6 +22,16 @@ const LENGTH_RATIO = 0.6;
 const queue = [];
 const stylesQueue = [];
 
+//choose random color
+const newRandomStroke = () => {
+  const r = random(255);
+  const g = random(255);
+  const b = random(255);
+  alpha -= 10;
+  if(alpha <= 0) noLoop();
+  stroke(r, g, b, alpha);
+}
+
 function setup() {
   //create canvas
   createCanvas(innerWidth, innerHeight);
@@ -39,16 +49,24 @@ function setup() {
 
   INITIAL_LENGTH = innerHeight > innerWidth ? innerWidth * 0.205 : innerHeight  * 0.205;
   
-  drawFirstBranch();
+  // drawFirstBranch();
 }
 
 let first = true;
+let rotation = -20;
+let alpha = 265;
 
 function draw() {
   translate(width / 2, height / 2);
+  rotate(rotation);
 
 
-  if(queue.length === 0) noLoop();
+  if(queue.length === 0) {
+    rotation += 20;
+    newRandomStroke();
+    drawFirstBranch();
+    return;
+  }
 
   drawNextBranches();
 
