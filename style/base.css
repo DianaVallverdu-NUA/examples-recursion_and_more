@@ -1,0 +1,48 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  /* margin and padding */
+  margin: 0;
+  padding: 0;
+  /* background color */
+  background-color: black;
+
+  /* font */
+  font-family: sans-serif;
+  font-size: 20px;
+  color: white;
+
+  /* remove scroll */
+  overflow: hidden;
+}
+
+/* small text */
+.s-text {
+  font-size: 15px;
+}
+
+/* link */
+.link {
+  all: unset;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+input {
+  all: unset;
+  appearance: none;
+  font-size: 15px;
+  border-radius: 5px;
+  background-color: rgb(255, 255, 255, 0.3);
+}
+
+/* sliders */
+input[type="range"] {
+  cursor: pointer;
+  display: inline-block;
+  vertical-align: middle;
+}

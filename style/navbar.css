@@ -1,0 +1,117 @@
+/* container has position absolute so it won't take space from the canvas */
+#nav-container {
+  position: absolute;
+  height: 60px;
+  width: 100%;
+}
+
+/* navigation bar is hidden by default */
+#nav-bar {
+  height: 100%;
+  /* opacity: 0; */
+  /* transform: translateY(-100px); */
+
+  background-color: black;
+
+  z-index: 1;
+}
+
+
+nav {
+  height: 100%;
+}
+
+/* contains list of clickable menu */
+ul {
+  height: 100%;
+  width: 100%;
+  /* remove bullets */
+  list-style-type: none;
+
+  /* remove margin */
+  margin: 0;
+  padding: 0;
+
+  /* display flex */
+  display: flex;
+  flex-direction: row;
+}
+
+/* each of the elements - 4 pages, ergo 25% each. % will need changing if # of pages changes */
+li {
+  /* width / height / margin */
+  width: 200px;
+  height: 100%;
+  margin: 0;
+}
+
+a {
+  /* display flex */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 100%;
+  height: 100%;
+}
+
+/* change background of nav elements on hover */
+li:hover {
+  background-color: rgb(122, 198, 122);
+}
+
+/* remove decoration from links and set color to page default */
+a {
+  text-decoration: none;
+  color: unset;
+}
+
+/* change style to mark which is the current page */
+#current-page {
+  background-color: green;
+}
+
+/* at end of navigation bar there's an unclickable text item */
+#last-navbar-item {
+  /* display flex */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  /* reset background color */
+  background-color: unset;
+
+  /* width auto depending on text */
+  width: auto;
+
+  /* align text to bottom */
+  align-items: last baseline;
+
+  /* margin on the right */
+  margin-right: 20px;
+  /* margin left auto so it goes at max right as possible within margin */
+  margin-left: auto;
+}
+
+/* shape title is at middle of top of the screen */
+#shape-title {
+  /* set at top */
+  position: absolute;
+  z-index: 0;
+  top: 0px;
+
+  /* same size as nav bar */
+  width: 100%;
+  height: 60px;
+
+  /* font slightly bigger */
+  font-size: 30px;
+  font-family: "Courier New", Courier, monospace;
+
+  /* display flex and aligned */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background-color: rgba(100, 100, 100, 0.5);
+}
