@@ -67,7 +67,7 @@ let alpha = 265;
 let drawingLine = false;
 let currentLine = {};
 
-const LINE_STEP = 500;
+const LINE_STEP = 10;
 
 const drawCurrentLine = () => {
   let newLength = currentLine.drawnLength + LINE_STEP;
@@ -130,7 +130,7 @@ const drawFirstBranch = () => {
 };
 
 const drawNextBranches = () => {
-  const branch = queue.shift();
+  const branch = queue.pop();
 
   const x = branch.x0 + branch.length * branch.cosine;
   const y = branch.y0 - branch.length * branch.sine;
