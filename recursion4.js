@@ -67,7 +67,7 @@ let alpha = 265;
 let drawingLine = false;
 let currentLine = {};
 
-const LINE_STEP = 50;
+const LINE_STEP = 100;
 
 const drawCurrentLine = () => {
   let newLength = currentLine.drawnLength + LINE_STEP;
