@@ -1,7 +1,7 @@
 //values of min and max lengths and strokes to be mapped out when drawing a branch
 const BRANCH_LENGTH = 100;
 
-const ANGLES = [230, 320];
+const ANGLES = [230, 315];
 const NUM_STEPS = 5;
 
 const MAX_ANGLE = 60;
@@ -40,7 +40,9 @@ function draw() {
     return;
   }
 
-  if (queue.length === 0) return noLoop();
+  if (queue.length === 0) {
+    return noLoop();
+  }
 
   if (inSegment) {
     drawSegment(currentBranch);
@@ -68,17 +70,21 @@ function containsObject(obj, list) {
     const listX = list[i].x.toFixed(2);
     const listY = list[i].y.toFixed(2);
     const listAngle = list[i].angle.toFixed(2);
-    if (
-      listX == objX &&
-      listY == objY &&
-      angle == listAngle
-    ) {
+    if (listX == objX && listY == objY && angle == listAngle) {
       return true;
     }
   }
 
   return false;
 }
+
+const reachedEnd = (x, y) => {
+  if (x < 0) return true;
+  if (y < 0) return true;
+  if (x > width) return true;
+  if (y > width) return true;
+  return false;
+};
 
 /**
  * Draw one single branch
@@ -105,6 +111,7 @@ const drawNextBranch = () => {
     if (containsObject({ x: newX0, y: newY0, angle: ANGLES[i] }, visited)) {
       continue;
     }
+    if (reachedEnd(newX0, newY0)) continue;
     queue.push({ x0: newX0, y0: newY0, angle: ANGLES[i] });
     visited.push({ x: newX0, y: newY0, angle: ANGLES[i] });
   }
